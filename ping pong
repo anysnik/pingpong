@@ -15,6 +15,9 @@ FPS = 60
 #win = font.render('YOU WIN!', True,(255, 0, 0))
 #lose = font.render('YOU LOSE!', True,(255, 0, 0))
 
+speed_x = 2
+speed_y = 2
+
 game = True
 finish = False
 class GameSprite(sprite.Sprite):
@@ -43,9 +46,11 @@ class Player(GameSprite):
         if keys_pressed[K_s] and self.rect.y < 395:
             self.rect.y += self.speed  
 
+
+
 player1 = Player('raketka.png', 10, 20, 6, 40, 140)
 player2 = Player('raketka.png', 650, 20, 6, 40, 140)
-boll = GameSprite("tennis.png", 325, 225, 3, 50, 50)
+ball = GameSprite("tennis.png", 325, 225, 2, 50, 50)
 
 while game:
     for e in event.get():
@@ -72,16 +77,20 @@ while game:
 #                    asteroid = Enemy('asteroid.png', randint(20,600), 0, randint(1,2), 50, 50)
 #                    asteroids.add(asteroid)
     if finish != True:
+            ball.rect.x += speed_x
+            ball.rect.y += speed_y
 
-            
-            
+
             window.blit(background,(0, 0))
 
             player1.update_l()
             player1.reset()
             player2.update_r()
             player2.reset()
-            boll.reset()
-
+            ball.rect.x += speed_x
+            ball.rect.y += speed_y
+            ball.reset()
+    if ball.rect.y > 450 or ball.rect.y < 0:
+        speed_y *= -1
     display. update()
     clock.tick(FPS)
