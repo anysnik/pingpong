@@ -80,7 +80,6 @@ while game:
             ball.rect.x += speed_x
             ball.rect.y += speed_y
 
-
             window.blit(background,(0, 0))
 
             player1.update_l()
@@ -92,5 +91,7 @@ while game:
             ball.reset()
     if ball.rect.y > 450 or ball.rect.y < 0:
         speed_y *= -1
+    if sprite.collide_rect(player1, ball) or sprite.collide_rect(player2, ball):
+        speed_x *= -1
     display. update()
     clock.tick(FPS)
